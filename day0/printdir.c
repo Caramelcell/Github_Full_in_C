@@ -22,4 +22,6 @@ int main(int argc, char* argv[])
     {
         printf("inod=%ld,len=%d,type=%d,name=%s\n",ptr->d_ino,ptr->d_reclen,ptr->d_type,ptr->d_name);
     }
+    closedir(dir);
+    return 0;
 }
