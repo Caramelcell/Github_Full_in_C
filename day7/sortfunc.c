@@ -84,13 +84,13 @@ void insert(int* arr, int len)
 
 void order_merge(int* arr, int left, int mid, int right)
 {
-	int* newarr = (int*)malloc((right - left + 1) * sizeof(int));
+	int* newarr = (int*)malloc((right + 1) * sizeof(int));
 	int i = left, j = mid + 1, k;
-	for (k = 0; k < right - left + 1; k++)
+	for (k = 0; k <= right; k++)
 	{
 		newarr[k] = arr[k];
 	}
-	k = 0;
+	k = left;
 	while (i <= mid && j <= right)
 	{
 		if (newarr[i] < newarr[j])
@@ -111,11 +111,13 @@ void order_merge(int* arr, int left, int mid, int right)
 	}
 	free(newarr);
 }
+
 void merge(int* arr, int left, int right)
 {
+	int mid;
 	if (left < right)
 	{
-		int mid = left + ((right - left) >> 1);
+		mid = left + ((right - left) >> 1);
 		merge(arr, left, mid);
 		merge(arr, mid + 1, right);
 		order_merge(arr, left, mid, right);
