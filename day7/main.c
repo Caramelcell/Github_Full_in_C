@@ -2,12 +2,12 @@
 
 int main()
 {
-	int N = 10000;	//数量
-	int R = 1000000;	//范围
+	int N = 10000;	//鏁伴噺
+	int R = 10000;	//鑼冨洿
 	int i;
 	time_t start, end;
 	int* arr = (int*)malloc(N * sizeof(int));
-	srand(time(NULL));	//产生种子
+	srand(time(NULL));	//浜х敓绉嶅瓙
 	for (i = 0; i < N; i++)
 	{
 		arr[i] = rand() % R;
