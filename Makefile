@@ -1,6 +1,6 @@
 #自定义变量
 SRCS:= $(wildcard *.cc)	#拿到当前目录下所有的.cc文件
-TARGETS:=$(SRCS:%.cc=%)	#把 main.c 去掉得到 main 字符串
+TARGETS:=$(SRCS:%.cc=%)	#把 filename.c 去掉得到 filename 字符串
 
 #预定义变量
 CXX:= g++
