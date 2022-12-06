@@ -14,16 +14,16 @@
   { string s2("hi"); }
 
   [&]() {
+    // 方括号内用来表示如何捕获本层作用域的变量，=为值传递，&为址传递
     // s2.at();  // error,cant capture
     s1[0] = 'H';
     cout << s1 << endl;
   }();  // auto capture
 
-  [](auto a, string& str) {
-    // 方括号内用来表示如何捕获本层作用域的变量，=为值传递，&为址传递，不填就无法捕获
+  [](auto a, string& s1) {
     a = 24;
-    str = "world";
-    cout << a << str << endl;
+    s1 = "world";
+    cout << a << s1 << endl;
   }(6, s1);  // 即用即丢，爽的一批
 
   [=](auto a) {
