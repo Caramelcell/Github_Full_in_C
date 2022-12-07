@@ -56,14 +56,18 @@ map<string, int> FreqWord(const vector<string>& function_word,
   map<string, int> freq_words;
   for (auto i : function_word) {
     freq_words.insert({i, 0});
-  }
+  }  //现阶段去掉这个手动初始化反而会降低速度
   string buf;
   istringstream iss(text);
   while (iss >> buf) {
-    for (auto word : function_word) {
-      if (buf == word) {
-        freq_words[buf]++;
-      }
+    // for (auto word : function_word) {
+    //   if (buf == word) {
+    //     freq_words[buf]++;
+    //   }
+    // }  // STL比你快
+    if (std::find(function_word.begin(), function_word.end(), buf) !=
+        function_word.end()) {
+      freq_words[buf]++;
     }
   }
   return freq_words;
@@ -80,10 +84,9 @@ double VectorLen(map<string, int>& vec) {
 double Similarity(const string& text1, const string& text2) {
   map<string, int> freq_word1 = FreqWord(function_word, text1);
   map<string, int> freq_word2 = FreqWord(function_word, text2);
-  int dotpro;
-  double len;
   auto i1 = freq_word1.begin();
-  auto i2 = freq_word1.begin();
+  auto i2 = freq_word2.begin();
+  double dotpro = 0;
   while (i1 != freq_word1.end() && i2 != freq_word2.end()) {
     dotpro += (i1->second) * (i2->second);
     ++i1;
@@ -96,10 +99,19 @@ int main(int argc, char* argv[]) {
   ifstream file1(argv[1]);
   ifstream file2(argv[2]);
 
+  clock_t start, end1,end2;
+  start = clock();
+
   string str_file1 = FileToString(file1);
   string str_file2 = FileToString(file2);
 
+  end1 = clock();
+  cout << (end1 - start) << endl;
+
   double result = Similarity(str_file1, str_file2);
+
+  end2 = clock();
+  cout << (end2 - end1) << endl;
 
   cout << result << endl;
   return 0;
